@@ -12,11 +12,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Kraken implements DataSource {
-    private static final String API_URL = "https://api.kraken.com/0/public/Ticker?pair=XXBTZUSD";
+    private static final String API_URL = "https://api.kraken.com/0/public/Ticker?pair=";
 
     @Override
-    public String getPrice() throws Exception {
-        URL url = new URL(API_URL);
+    public String getPrice(String cryptoSymbol) throws Exception {
+        URL url = new URL(API_URL + cryptoSymbol);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -27,7 +27,7 @@ public class Kraken implements DataSource {
             }
             in.close();
             JSONObject jsonObject = new JSONObject(response.toString());
-            double btcPrice = jsonObject.getJSONObject("result").getJSONObject("XXBTZUSD").getJSONArray("c").getDouble(0);
+            double btcPrice = jsonObject.getJSONObject("result").getJSONObject(cryptoSymbol).getJSONArray("c").getDouble(0);
             return formatPrice(btcPrice);
         } finally {
             urlConnection.disconnect();

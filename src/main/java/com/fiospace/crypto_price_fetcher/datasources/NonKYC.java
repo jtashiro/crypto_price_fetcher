@@ -11,12 +11,12 @@ import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Binance implements DataSource {
-    private static final String API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT";
+public class NonKYC implements DataSource {
+    private static final String API_URL = "https://api.nonkyc.io/api/v2/ticker/";
 
     @Override
     public String getPrice(String cryptoSymbol) throws Exception {
-        URL url = new URL(API_URL);
+        URL url = new URL(API_URL + cryptoSymbol);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -27,7 +27,7 @@ public class Binance implements DataSource {
             }
             in.close();
             JSONObject jsonObject = new JSONObject(response.toString());
-            double btcPrice = jsonObject.getDouble("price");
+            double btcPrice =  jsonObject.getDouble("last_price");
             return formatPrice(btcPrice);
         } finally {
             urlConnection.disconnect();

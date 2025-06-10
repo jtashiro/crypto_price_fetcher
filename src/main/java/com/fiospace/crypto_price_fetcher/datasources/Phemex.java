@@ -16,8 +16,8 @@ public class Phemex implements DataSource {
     private static final String SYMBOL = "BTCUSD";
 
     @Override
-    public String getPrice() throws Exception {
-        URL url = new URL(API_URL + "?symbol=" + SYMBOL);
+    public String getPrice(String cryptoSymbol) throws Exception {
+        URL url = new URL(API_URL + "?symbol=" + cryptoSymbol);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

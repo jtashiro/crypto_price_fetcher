@@ -12,11 +12,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Gemini implements DataSource {
-    private static final String API_URL = "https://api.gemini.com/v2/ticker/btcusd";
+    private static final String API_URL = "https://api.gemini.com/v2/ticker/";
 
     @Override
-    public String getPrice() throws Exception {
-        URL url = new URL(API_URL);
+    public String getPrice(String cryptoSymbol) throws Exception {
+        URL url = new URL(API_URL + cryptoSymbol);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

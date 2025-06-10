@@ -15,7 +15,7 @@ public class CoinGecko implements DataSource {
     private static final String API_URL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
 
     @Override
-    public String getPrice() throws Exception {
+    public String getPrice(String cryptoSymbol) throws Exception {
         URL url = new URL(API_URL);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

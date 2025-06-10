@@ -15,7 +15,7 @@ public class CryptoCompare implements DataSource {
     private static final String API_URL = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
 
     @Override
-    public String getPrice() throws Exception {
+    public String getPrice(String cryptoSymbol) throws Exception {
         URL url = new URL(API_URL);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

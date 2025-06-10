@@ -12,11 +12,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Bitfinex implements DataSource {
-    private static final String API_URL = "https://api.bitfinex.com/v1/pubticker/btcusd";
+    private static final String API_URL = "https://api.bitfinex.com/v1/pubticker/";
 
     @Override
-    public String getPrice() throws Exception {
-        URL url = new URL(API_URL);
+    public String getPrice(String cryptoSymbol) throws Exception {
+        URL url = new URL(API_URL + cryptoSymbol.toLowerCase());
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

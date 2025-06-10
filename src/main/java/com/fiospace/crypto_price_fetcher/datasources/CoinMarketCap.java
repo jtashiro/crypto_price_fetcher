@@ -17,7 +17,7 @@ public class CoinMarketCap implements DataSource {
     private static final String SYMBOL = "BTC";
 
     @Override
-    public String getPrice() throws Exception {
+    public String getPrice(String cryptoSymbol) throws Exception {
         URL url = new URL(API_URL + "?symbol=" + SYMBOL);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestProperty("X-CMC_PRO_API_KEY", API_KEY);
